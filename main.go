@@ -65,6 +65,7 @@ func keysFromMap(keyMap *Map) (keys []string) {
 					key, comment, _, _, err := ssh.ParseAuthorizedKey([]byte(k))
 					if err != nil {
 						log.Printf("%v", err)
+						continue
 					}
 					// sanitize
 					fmtKey := strings.TrimSuffix(string(ssh.MarshalAuthorizedKey(key)), "\n") + " " + comment + "\n"
