@@ -103,7 +103,7 @@ func writeKeys(keys []string) {
 
 func sync() {
 	intrv, _ := strconv.Atoi(interval)
-	for range time.Tick(time.Second * time.Duration(intrv)) {
+	for t := time.Tick(time.Second * time.Duration(intrv)); ; <-t {
 		var keyMap Map
 		resp, err := http.Get(uri)
 		defer func() {
