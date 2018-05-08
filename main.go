@@ -101,27 +101,31 @@ func writeKeys(keys []string) {
 	}
 }
 
+func updateKeys() {
+	var keyMap Map
+	resp, err := http.Get(uri)
+	defer func() {
+		io.Copy(ioutil.Discard, resp.Body)
+		resp.Body.Close()
+	}()
+	if err != nil {
+		log.Printf("%v", err)
+		return
+	}
+	dec := json.NewDecoder(resp.Body)
+	err = dec.Decode(&keyMap)
+	if err != nil {
+		log.Printf("%v", err)
+		return
+	}
+	keys := keysFromMap(&keyMap)
+	writeKeys(keys)
+}
+
 func sync() {
 	intrv, _ := strconv.Atoi(interval)
 	for t := time.Tick(time.Second * time.Duration(intrv)); ; <-t {
-		var keyMap Map
-		resp, err := http.Get(uri)
-		defer func() {
-			io.Copy(ioutil.Discard, resp.Body)
-			resp.Body.Close()
-		}()
-		if err != nil {
-			log.Printf("%v", err)
-			continue
-		}
-		dec := json.NewDecoder(resp.Body)
-		err = dec.Decode(&keyMap)
-		if err != nil {
-			log.Printf("%v", err)
-			continue
-		}
-		keys := keysFromMap(&keyMap)
-		writeKeys(keys)
+		updateKeys()
 	}
 }
 
