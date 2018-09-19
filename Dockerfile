@@ -1,14 +1,11 @@
-FROM alpine:3.8
-
-ENV GOPATH=/go
-
+FROM golang:alpine AS build
 WORKDIR /go/src/app
-COPY main.go /go/src/app/
+COPY . /go/src/app/
+RUN apk --no-cache add git &&\
+ go get ./... &&\
+ CGO_ENABLED=0 go build -o /ssh-key-agent .
 
-RUN apk --no-cache add ca-certificates go git musl-dev && \
- go get ./... && \
- CGO_ENABLED=0 go build -o /ssh-key-agent . && \
- apk del go git musl-dev && \
- rm -rf $GOPATH
-
+FROM alpine:3.8
+RUN apk add --no-cache ca-certificates
+COPY --from=build /ssh-key-agent /ssh-key-agent
 CMD [ "/ssh-key-agent" ]
