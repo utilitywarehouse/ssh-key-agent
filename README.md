@@ -33,8 +33,8 @@ After=docker.service
 Requires=docker.service
 [Service]
 Restart=on-failure
-ExecStartPre=-mkdir -p /home/user/.ssh/
-ExecStartPre=-touch /home/user/.ssh/authorized_keys
+ExecStartPre=-/bin/mkdir -p /home/user/.ssh/
+ExecStartPre=-/usr/bin/touch /home/user/.ssh/authorized_keys
 ExecStart=/bin/sh -c 'docker run --name=%p_$(uuidgen) --rm \
  -v /home/user/.ssh/authorized_keys:/authorized_keys \
  -e SKA_KEY_URI=https://[app/bucket]/authmap \
