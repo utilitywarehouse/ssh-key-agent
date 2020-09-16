@@ -25,12 +25,12 @@ var (
 	akfLoc = os.Getenv("SKA_AKF_LOC")
 )
 
-type Map struct {
+type keyMap struct {
 	LastUpdated string  `json:"last_updated"`
-	Groups      []Group `json:"groups"`
+	Groups      []group `json:"groups"`
 }
 
-type Group struct {
+type group struct {
 	Name string   `json:"name"`
 	Keys []string `json:"keys"`
 }
@@ -55,7 +55,7 @@ func validate() {
 	}
 }
 
-func keysFromMap(keyMap *Map) (keys []string) {
+func keysFromMap(keyMap *keyMap) (keys []string) {
 	var rawKeys []string
 	groupNames := strings.Split(groups, ",")
 	for _, gn := range groupNames {
@@ -102,7 +102,7 @@ func writeKeys(keys []string) {
 }
 
 func updateKeys() {
-	var keyMap Map
+	var keyMap keyMap
 	resp, err := http.Get(uri)
 	defer func() {
 		io.Copy(ioutil.Discard, resp.Body)
