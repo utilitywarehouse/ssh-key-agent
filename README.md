@@ -36,6 +36,6 @@ Repository includes a terraform module, for use instructions have a look at
 
 ### releasing
 
-Before creating a tag / releaes in Github, please update the Docker image
+Before creating a tag / release in Github, please update the Docker image
 refernce in
 [./terraform/variables.tf](./terraform/variables.tf)
