@@ -5,7 +5,7 @@ data "ignition_systemd_unit" "ssh-key-agent" {
     {
       uri     = var.uri
       groups  = "${join(",", var.groups)}"
-      version = var.ssh_key_agent_version
+      version = var.docker_image_version
     }
   )
 }
