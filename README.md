@@ -2,7 +2,8 @@
 
 [![Docker Repository on Quay](https://quay.io/repository/utilitywarehouse/ssh-key-agent/status "Docker Repository on Quay")](https://quay.io/repository/utilitywarehouse/ssh-key-agent)
 
-Companion service for https://github.com/utilitywarehouse/ssh-key-manager runs on the host and populates `authorized_keys` file based on the groups provided.
+Companion service for https://github.com/utilitywarehouse/ssh-key-manager runs
+on the host and populates `authorized_keys` file based on the groups provided.
 
 ### client
 
