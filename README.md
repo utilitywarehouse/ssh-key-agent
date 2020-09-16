@@ -33,3 +33,9 @@ example Systemd service: [./terraform/resources/ssh-key-agent.service](./terrafo
 
 Repository includes a terraform module, for use instructions have a look at
 [./terraform/README.md](./terraform/README.md)
+
+### releasing
+
+Before creating a tag / releaes in Github, please update the Docker image
+refernce in
+[./terraform/variables.tf](./terraform/variables.tf)
