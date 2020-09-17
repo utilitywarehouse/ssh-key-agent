@@ -19,7 +19,6 @@ module "ssh_key_agent" {
     "ssh-admin@example-org.com"
   ]
 
-  ssh_key_agent_version = "1.0.4"
   uri                   = "https://s3-eu-west-1.amazonaws.com/example-keys-cache/authmap"
 }
 ```

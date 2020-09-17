@@ -8,8 +8,9 @@ variable "groups" {
   description = "A list of allowed google groups"
 }
 
-variable "ssh_key_agent_version" {
+variable "docker_image_version" {
   type        = string
+  default     = "1.0.6"
   description = "The ssh-key-agent version"
 }
 
