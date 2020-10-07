@@ -31,6 +31,32 @@ Note: release target assumes that you have a working setup of [GitHub's CLI](htt
 
 ### Docker instructions
 
+If you prefer to run ssh-key-agent with docker, here's an example service:
+
+```
+[Unit]
+Description=ssh-key-agent
+After=docker.service
+Requires=docker.service
+[Service]
+Restart=on-failure
+ExecStartPre=-/usr/bin/mkdir -p /home/core/.ssh
+ExecStartPre=-/usr/bin/touch /home/core/.ssh/authorized_keys
+ExecStartPre=-/usr/bin/chown -R "core":"core" /home/core/.ssh
+ExecStartPre=-/usr/bin/chmod 700 /home/core/.ssh
+ExecStartPre=-/usr/bin/chmod 644 /home/core/.ssh/authorized_keys
+ExecStart=/bin/sh -c 'docker run --name=%p_$(uuidgen) --rm \
+ -v /home/core/.ssh/authorized_keys:/authorized_keys \
+ -e SKA_KEY_URI=${uri} \
+ -e SKA_GROUPS=${groups} \
+ -e SKA_AKF_LOC=/authorized_keys \
+ -e SKA_INTERVAL=60 \
+ quay.io/utilitywarehouse/ssh-key-agent:${version}'
+ExecStop=/bin/sh -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
+[Install]
+WantedBy=multi-user.target
+```
+
 [![Docker Repository on Quay](https://quay.io/repository/utilitywarehouse/ssh-key-agent/status "Docker Repository on Quay")](https://quay.io/repository/utilitywarehouse/ssh-key-agent)
 
 Whatever file you are mounting into container needs to exist prior, otherwise
