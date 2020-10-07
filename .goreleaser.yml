@@ -1,0 +1,19 @@
+builds:
+  - id: main
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+archives:
+  - id: main
+    builds:
+      - main
+    format: binary
+    files:
+      - none*
+release:
+  github:
+    owner: utilitywarehouse
+    name: ssh-key-agent

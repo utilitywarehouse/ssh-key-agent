@@ -25,9 +25,7 @@ Repository includes a terraform module, for use instructions have a look at
 
 ### releasing
 
-Make sure the new version is updated in [./terraform/variables.tf](./terraform/variables.tf) and run `make release X.X.X`
-
-Note: release target assumes that you have a working setup of [GitHub's CLI](https://github.com/cli/cli)
+Before creating a tag/release in Github, please update the verion in [./terraform/variables.tf](./terraform/variables.tf)
 
 ### Docker instructions
 
