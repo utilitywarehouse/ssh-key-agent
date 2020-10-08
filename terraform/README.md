@@ -6,13 +6,13 @@ The input variables are documented in their description and it's best to refer
 to [variables.tf](variables.tf).
 
 ## Outputs
-- `id` - the id of the ignition systemd unit file
-- `template_rendered` - the systemd unit template, rendered with the provided variables
+- `unit` - the ignition systemd unit file
+- `file` - the ignition file to setup the ssh-key-agent binary
 
 ## Usage
 ```hcl
 module "ssh_key_agent" {
-  source = "github.com/utilitywarehouse/tf_ssh_key_agent"
+  source = "github.com/utilitywarehouse/ssh-key-agent//terraform"
 
   groups  = [
     "ssh-dev@example-org.com",
