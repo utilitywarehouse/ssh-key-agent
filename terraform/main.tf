@@ -16,7 +16,16 @@ data "ignition_systemd_unit" "ssh-key-agent" {
       uri     = var.uri
       groups  = "${join(",", var.groups)}"
       version = var.agent_version
-      source  = "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/${var.agent_version}/ssh-key-agent_${var.agent_version}_linux_amd64"
+    }
+  )
+}
+
+data "ignition_systemd_unit" "ssh-key-agent-download" {
+  name    = "ssh-key-agent-download.service"
+  enabled = var.enabled
+  content = templatefile("${path.module}/resources/ssh-key-agent-download.service",
+    {
+      source = "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/${var.agent_version}/ssh-key-agent_${var.agent_version}_linux_amd64"
     }
   )
 }
