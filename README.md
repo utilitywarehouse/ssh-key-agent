@@ -1,5 +1,7 @@
 # ssh-key-agent
 
+[![Build Status](https://drone.prod.merit.uw.systems/api/badges/utilitywarehouse/ssh-key-agent/status.svg)](https://drone.prod.merit.uw.systems/utilitywarehouse/ssh-key-agent)
+
 Companion service for https://github.com/utilitywarehouse/ssh-key-manager runs
 on the host and populates `authorized_keys` file based on the groups provided.
 
@@ -54,8 +56,6 @@ ExecStop=/bin/sh -c 'docker stop -t 3 "$(docker ps -q --filter=name=%p_)"'
 [Install]
 WantedBy=multi-user.target
 ```
-
-[![Build Status](https://drone.prod.merit.uw.systems/api/badges/utilitywarehouse/ssh-key-agent/status.svg)](https://drone.prod.merit.uw.systems/utilitywarehouse/ssh-key-agent)
 
 Whatever file you are mounting into container needs to exist prior, otherwise
 docker will create it as directory:
