@@ -38,7 +38,7 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      repo: utilitywarehouse/ssh-key-agent
+      repo: quay.io/utilitywarehouse/ssh-key-agent
       registry: quay.io
       auto_tag: true
 
