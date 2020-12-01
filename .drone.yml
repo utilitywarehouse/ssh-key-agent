@@ -8,28 +8,25 @@ steps:
     commands:
       - git fetch --tags
 
-  - name: test
-    image: golang:1.15
-    environment:
-      CGO_ENABLED: 0
-    volumes:
-      - name: deps
-        path: /go
-    commands:
-      - go test -v ./... -cover
-
   - name: release
     image: golang:1.15
     environment:
+      CGO_ENABLED: 0
       GITHUB_TOKEN:
         from_secret: github_token
-    volumes:
-      - name: deps
-        path: /go
     commands:
+      - go test -v ./... -cover
       - curl -sL https://git.io/goreleaser | bash
     when:
       event: tag
+
+  - name: docker-tag
+    image: alpine
+    commands:
+      - test "${DRONE_BRANCH}" == "master" && echo -n "latest," > .tags || true
+      - test -n "${DRONE_BRANCH}" && test "${DRONE_BRANCH}" != "master" && echo -n "${DRONE_BRANCH}," > .tags || true
+      - test -n "${DRONE_TAG}" && echo -n "${DRONE_TAG}," >> .tags || true
+      - sed -i "s/,$//" .tags
 
   - name: docker-publish
     image: plugins/docker
@@ -40,8 +37,8 @@ steps:
         from_secret: docker_password
       repo: quay.io/utilitywarehouse/ssh-key-agent
       registry: quay.io
-      auto_tag: true
 
-volumes:
-  - name: deps
-    temp: {}
+trigger:
+  event:
+    exclude:
+      - pull_request
