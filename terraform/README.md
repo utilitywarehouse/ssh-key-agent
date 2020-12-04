@@ -7,12 +7,14 @@ to [variables.tf](variables.tf).
 
 ## Outputs
 Binary use:
-- `unit` - the ignition systemd unit file (binary)
+- `unit` - ignition systemd unit
 - `file` - ssh-key-agent binary ignition file
-- `download-unit` - systemd service to download the ssh-key-agent binary
 
 Docker use:
 - `docker_unit` - systemd service that runs ssh-key-agent as a docker container
+
+If unable to use `file` resource in binary installation:
+- `download-unit` - systemd service to download the ssh-key-agent binary
 
 ## Usage
 ```hcl
