@@ -1,4 +1,4 @@
-data "ignition_file" "ssh-key-agent" {
+data "ignition_file" "ssh_key_agent" {
   mode       = 493
   filesystem = "root"
   path       = "/opt/bin/ssh-key-agent"
@@ -8,7 +8,7 @@ data "ignition_file" "ssh-key-agent" {
   }
 }
 
-data "ignition_systemd_unit" "ssh-key-agent" {
+data "ignition_systemd_unit" "ssh_key_agent" {
   name    = "ssh-key-agent.service"
   enabled = var.enabled
   content = templatefile("${path.module}/resources/ssh-key-agent.service",
@@ -20,7 +20,7 @@ data "ignition_systemd_unit" "ssh-key-agent" {
   )
 }
 
-data "ignition_systemd_unit" "ssh-key-agent-download" {
+data "ignition_systemd_unit" "ssh_key_agent_download" {
   name    = "ssh-key-agent-download.service"
   enabled = var.enabled
   content = templatefile("${path.module}/resources/ssh-key-agent-download.service",
