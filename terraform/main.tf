@@ -29,3 +29,16 @@ data "ignition_systemd_unit" "ssh-key-agent-download" {
     }
   )
 }
+
+data "ignition_systemd_unit" "ssh_key_agent_docker" {
+  name    = "ssh-key-agent.service"
+  enabled = var.enabled
+  content = templatefile("${path.module}/resources/ssh-key-agent-docker.service",
+
+    {
+      uri     = var.uri
+      groups  = "${join(",", var.groups)}"
+      version = var.agent_version
+    }
+  )
+}
