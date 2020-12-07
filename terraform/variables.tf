@@ -10,7 +10,7 @@ variable "groups" {
 
 variable "agent_version" {
   type        = string
-  default     = "1.0.9"
+  default     = "1.0.10"
   description = "The ssh-key-agent version"
 }
 
