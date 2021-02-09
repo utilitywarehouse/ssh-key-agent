@@ -14,7 +14,7 @@ data "ignition_systemd_unit" "ssh_key_agent" {
   content = templatefile("${path.module}/resources/ssh-key-agent.service",
     {
       uri     = var.uri
-      groups  = "${join(",", var.groups)}"
+      groups  = join(",", var.groups)
       version = var.agent_version
     }
   )
@@ -37,7 +37,7 @@ data "ignition_systemd_unit" "ssh_key_agent_docker" {
 
     {
       uri     = var.uri
-      groups  = "${join(",", var.groups)}"
+      groups  = join(",", var.groups)
       version = var.agent_version
     }
   )
