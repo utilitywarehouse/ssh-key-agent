@@ -1,7 +1,6 @@
 data "ignition_file" "ssh_key_agent" {
-  mode       = 493
-  filesystem = "root"
-  path       = "/opt/bin/ssh-key-agent"
+  mode = 493
+  path = "/opt/bin/ssh-key-agent"
 
   source {
     source = "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/${var.agent_version}/ssh-key-agent_${var.agent_version}_linux_amd64"
