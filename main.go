@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -95,7 +94,7 @@ func writeKeys(keys []string) {
 	for _, k := range keys {
 		out = append(out, k...)
 	}
-	err := ioutil.WriteFile(akfLoc, out, 0644)
+	err := os.WriteFile(akfLoc, out, 0644)
 	if err != nil {
 		log.Printf("%v", err)
 	}
@@ -105,7 +104,7 @@ func updateKeys() {
 	var keyMap keyMap
 	resp, err := http.Get(uri)
 	defer func() {
-		io.Copy(ioutil.Discard, resp.Body)
+		io.Copy(io.Discard, resp.Body)
 		resp.Body.Close()
 	}()
 	if err != nil {
