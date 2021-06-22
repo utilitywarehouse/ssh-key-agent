@@ -2,9 +2,9 @@
 Description=ssh-key-agent
 After=network-online.target
 Wants=network-online.target
-StartLimitIntervalSec=0 # Allow infinite restarts
 [Service]
 Restart=on-failure
+RestartSec=10
 ExecStartPre=-/usr/bin/mkdir -p /home/core/.ssh
 ExecStartPre=-/usr/bin/touch /home/core/.ssh/authorized_keys
 ExecStartPre=-/usr/bin/chown -R "core":"core" /home/core/.ssh

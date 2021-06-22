@@ -3,11 +3,11 @@ Description=ssh-key-agent-download
 Wants=network-online.target
 After=network-online.target
 Before=ssh-key-agent.service
-StartLimitIntervalSec=0 # Allow infinite restarts
 
 [Service]
 Type=oneshot
 Restart=on-failure
+RestartSec=10
 ExecStart=-/usr/bin/wget -N -q -O "/opt/bin/ssh-key-agent" "${source}"
 ExecStart=-/usr/bin/chmod 755 /opt/bin/ssh-key-agent
 ExecStartPost=/bin/systemctl disable ssh-key-agent-download.service
