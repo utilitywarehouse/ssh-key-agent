@@ -3,6 +3,7 @@ Description=ssh-key-agent-download
 Wants=network-online.target
 After=network-online.target
 Before=ssh-key-agent.service
+StartLimitIntervalSec=0 # Allow infinite restarts
 
 [Service]
 Type=oneshot

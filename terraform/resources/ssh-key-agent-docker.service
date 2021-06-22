@@ -2,6 +2,7 @@
 Description=ssh-key-agent
 After=docker.service
 Requires=docker.service
+StartLimitIntervalSec=0 # Allow infinite restarts
 [Service]
 Restart=on-failure
 ExecStartPre=-/usr/bin/mkdir -p /home/core/.ssh
