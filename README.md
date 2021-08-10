@@ -1,7 +1,5 @@
 # ssh-key-agent
 
-[![Build Status](https://drone.prod.merit.uw.systems/api/badges/utilitywarehouse/ssh-key-agent/status.svg)](https://drone.prod.merit.uw.systems/utilitywarehouse/ssh-key-agent)
-
 Companion service for https://github.com/utilitywarehouse/ssh-key-manager runs
 on the host and populates `authorized_keys` file based on the groups provided.
 
