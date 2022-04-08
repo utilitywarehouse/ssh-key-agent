@@ -28,7 +28,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.16
+          go-version: 1.18
       - name: Test
         run: go test ./...
       - name: Run GoReleaser
@@ -58,12 +58,14 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Login to Quay.io Container Registry
+        if: github.actor != 'dependabot[bot]'
         uses: docker/login-action@v1
         with:
           registry: quay.io
           username: utilitywarehouse+drone_ci
           password: ${{ secrets.SYSTEM_QUAY_TOKEN }}
       - name: Build and push Docker image
+        if: github.actor != 'dependabot[bot]'
         uses: docker/build-push-action@v2
         with:
           context: .
