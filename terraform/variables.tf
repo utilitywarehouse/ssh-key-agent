@@ -4,7 +4,7 @@ variable "uri" {
 }
 
 variable "groups" {
-  type        = list
+  type        = list(any)
   description = "A list of allowed google groups"
 }
 
@@ -18,4 +18,8 @@ variable "enabled" {
   type        = string
   default     = true
   description = "Whether or not the service shall be enabled"
+}
+
+locals {
+  vless_agent_version = trimprefix(var.agent_version, "v")
 }

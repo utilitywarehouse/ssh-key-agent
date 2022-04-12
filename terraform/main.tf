@@ -4,7 +4,7 @@ data "ignition_file" "ssh_key_agent" {
   path       = "/opt/bin/ssh-key-agent"
 
   source {
-    source = "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/${var.agent_version}/ssh-key-agent_${var.agent_version}_linux_amd64"
+    source = "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/${var.agent_version}/ssh-key-agent_${local.vless_agent_version}_linux_amd64"
   }
 }
 
@@ -25,7 +25,7 @@ data "ignition_systemd_unit" "ssh_key_agent_download" {
   enabled = var.enabled
   content = templatefile("${path.module}/resources/ssh-key-agent-download.service",
     {
-      source = "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/${var.agent_version}/ssh-key-agent_${var.agent_version}_linux_amd64"
+      source = "https://github.com/utilitywarehouse/ssh-key-agent/releases/download/${var.agent_version}/ssh-key-agent_${local.vless_agent_version}_linux_amd64"
     }
   )
 }
