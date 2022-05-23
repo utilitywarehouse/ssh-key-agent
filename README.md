@@ -1,9 +1,8 @@
-# ssh-key-agent
+ssh-key-agent
+=============
 
 Companion service for https://github.com/utilitywarehouse/ssh-key-manager runs
 on the host and populates `authorized_keys` file based on the groups provided.
-
-### client
 
 Required environment variables:
 
@@ -14,20 +13,26 @@ Required environment variables:
 | SKA_AKF_LOC   | /home/user/.ssh/authorized_keys                  | Location of the `authorized_keys` file which to write to               |
 | SKA_INTERVAL  | 60                                               | Interval, how often the keys should be synced (seconds) AWS access key |
 
-#### systemd service file
+SystemD service file
+--------------------
 
-Example Systemd service: [./terraform/resources/ssh-key-agent.service](./terraform/resources/ssh-key-agent.service)
+Example SystemD service:
+[./terraform/resources/ssh-key-agent.service](./terraform/resources/ssh-key-agent.service)
 
-### terraform module
+Terraform module
+----------------
 
 Repository includes a terraform module, for use instructions have a look at
 [./terraform/README.md](./terraform/README.md)
 
-### releasing
+Releasing
+---------
 
-Before creating a tag/release in Github, please update the verion in [./terraform/variables.tf](./terraform/variables.tf)
+Before creating a tag/release in Github, please update the verion in
+[./terraform/variables.tf](./terraform/variables.tf)
 
-### Docker instructions
+Docker instructions
+-------------------
 
 If you prefer to run ssh-key-agent with docker, here's an example service:
 
@@ -61,3 +66,23 @@ docker will create it as directory:
 > If you use -v or --volume to bind-mount a file or directory that does not yet
 > exist on the Docker host, -v will create the endpoint for you. It is always
 > created as a directory.
+
+Debugging boxes where SKA is not successful
+-------------------------------------------
+
+Either ssh-key-agent could not start or node has no internet access, you will
+need to load a static key to log on. Example ignition file:
+
+```
+data "ignition_file" "authorized_keys" {
+  filesystem = "root"
+  path       = "/home/core/.ssh/authorized_keys"
+  mode       = 493
+
+  content {
+    content = <<-EOF
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN5OOYqgvQMxnDnSQtMNNLl9JtIx1cdVXoiQ3+GXP0oZ gangel@uw.co.uk
+EOF
+  }
+}
+```
