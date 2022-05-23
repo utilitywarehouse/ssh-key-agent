@@ -1,4 +1,4 @@
-ssh-key-agent
+sh-key-agent
 =============
 
 Companion service for https://github.com/utilitywarehouse/ssh-key-manager runs
@@ -13,10 +13,10 @@ Required environment variables:
 | SKA_AKF_LOC   | /home/user/.ssh/authorized_keys                  | Location of the `authorized_keys` file which to write to               |
 | SKA_INTERVAL  | 60                                               | Interval, how often the keys should be synced (seconds) AWS access key |
 
-SystemD service file
+systemd service file
 --------------------
 
-Example SystemD service:
+Example systemd service:
 [./terraform/resources/ssh-key-agent.service](./terraform/resources/ssh-key-agent.service)
 
 Terraform module
