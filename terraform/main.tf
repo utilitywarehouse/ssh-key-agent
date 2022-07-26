@@ -1,6 +1,5 @@
 data "ignition_file" "ssh_key_agent" {
   mode       = 493
-  filesystem = "root"
   path       = "/opt/bin/ssh-key-agent"
 
   source {
