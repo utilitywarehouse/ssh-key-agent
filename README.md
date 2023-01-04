@@ -1,4 +1,4 @@
-sh-key-agent
+ssh-key-agent
 =============
 
 Companion service for https://github.com/utilitywarehouse/ssh-key-manager runs
