@@ -1,4 +1,4 @@
-FROM golang:1.19-alpine AS build
+FROM golang:1.20-alpine AS build
 WORKDIR /go/src/github.com/utilitywarehouse/ssh-key-agent
 COPY . /go/src/github.com/utilitywarehouse/ssh-key-agent
 RUN apk --no-cache add git \
