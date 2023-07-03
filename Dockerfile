@@ -5,7 +5,7 @@ RUN apk --no-cache add git \
       && go get ./... \
       && CGO_ENABLED=0 go build -o /ssh-key-agent .
 
-FROM alpine:3.17
+FROM alpine:3.18
 RUN apk add --no-cache ca-certificates
 COPY --from=build /ssh-key-agent /ssh-key-agent
 CMD [ "/ssh-key-agent" ]
