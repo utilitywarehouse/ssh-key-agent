@@ -1,3 +1,13 @@
+variable "arch" {
+  type        = string
+  description = "The ssh-key-agent binary arch to fecth if not running in docker"
+  default     = "amd64"
+  validation {
+    condition     = contains(["amd64", "arm64"], var.arch)
+    error_message = "Arch should be one of: amd64, arm64"
+  }
+}
+
 variable "uri" {
   type        = string
   description = "The S3 URI of the authmap file"
