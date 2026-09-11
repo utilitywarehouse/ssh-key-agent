@@ -101,19 +101,19 @@ func writeKeys(keys []string) {
 }
 
 func updateKeys() {
-	var keyMap keyMap
 	resp, err := http.Get(uri)
-	defer func() {
-		io.Copy(io.Discard, resp.Body)
-		resp.Body.Close()
-	}()
 	if err != nil {
 		log.Printf("%v", err)
 		return
 	}
+	defer func() {
+		io.Copy(io.Discard, resp.Body)
+		resp.Body.Close()
+	}()
+
+	var keyMap keyMap
 	dec := json.NewDecoder(resp.Body)
-	err = dec.Decode(&keyMap)
-	if err != nil {
+	if err := dec.Decode(&keyMap); err != nil {
 		log.Printf("%v", err)
 		return
 	}
